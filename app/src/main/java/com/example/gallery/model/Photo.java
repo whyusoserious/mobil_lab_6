@@ -3,9 +3,14 @@ package com.example.gallery.model;
 
 import java.util.HashMap;
 import java.util.Map;
+import androidx.annotation.NonNull;
+import androidx.room.PrimaryKey;
+import androidx.room.Entity;
 
+@Entity
 public class Photo {
-
+    @PrimaryKey
+    @NonNull
     private String id;
 
     private String owner;
@@ -26,13 +31,13 @@ public class Photo {
 
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-
+    @NonNull
     public String getId() {
         return id;
     }
 
 
-    public void setId(String id) {
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 
