@@ -3,6 +3,8 @@ package com.example.gallery;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.gallery.model.*;
+
 public class PhotoGallery extends AppCompatActivity {
 
     @Override
