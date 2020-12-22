@@ -22,7 +22,7 @@ public abstract class PhotosDB extends RoomDatabase{
             synchronized (PhotosDB.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            PhotosDB.class, "database")
+                            PhotosDB.class, "database").allowMainThreadQueries()
                             .build();
                 }
             }
