@@ -10,9 +10,9 @@ import retrofit2.http.Query;
 
 
 public interface FlickrAPI {
-    @GET("services/rest/?method=flickr.photos.getRecent&api_key=05b2b5ee78a71c712cbd1a79d34dac6f&extras=url_s&format=json&nojsoncallback=1")
+    @GET("services/rest/?method=flickr.photos.getRecent&api_key=6287c9114b6e765132c9e6ed66fe6b10&extras=url_s&format=json&nojsoncallback=1")
     Call<Example> getRecent();
-    @GET("services/rest/?method=flickr.photos.search&api_key=05b2b5ee78a71c712cbd1a79d34dac6f&extras=url_s&format=json&nojsoncallback=1")
+    @GET("services/rest/?method=flickr.photos.search&api_key=6287c9114b6e765132c9e6ed66fe6b10&extras=url_s&format=json&nojsoncallback=1")
     Call<Example> getSearchPhotos(@Query("text") String keyWord);
 
 }

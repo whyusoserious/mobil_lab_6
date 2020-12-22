@@ -17,12 +17,10 @@ import retrofit2.Callback;
 import com.squareup.picasso.*;
 
 public class PhotoAdapter extends RecyclerView.Adapter <PhotoAdapter.ViewHolder> {
-    private final Callback<Example> photoGallery;
-    private OnInsertListener onInsertListener;
+    private OnLongClickListener onLongClickListener;
     private final List<Photo> photos;
 
-    public PhotoAdapter(Callback<Example> parent, List<Photo> values ) {
-        photoGallery = parent;
+    public PhotoAdapter(List<Photo> values ) {
         photos = values;
     }
 
@@ -32,25 +30,23 @@ public class PhotoAdapter extends RecyclerView.Adapter <PhotoAdapter.ViewHolder>
         ViewHolder(View view){
             super(view);
             picture = view.findViewById(R.id.img);
-            picture.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    onInsertListener.OnInsert(photos.get(ViewHolder.this.getAdapterPosition()));
-                }
+            picture.setOnLongClickListener(v -> {
+                onLongClickListener.onLongClickListener(photos.get(this.getAdapterPosition()));
+                return true;
             });
         }
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        String stringconnetcion;
-        stringconnetcion ="https://farm"+ Integer.toString(photos.get(position).getFarm()) +
-                ".staticflickr.com/" + photos.get(position).getSecret() + "_q.jpg";
-        Picasso.get().load(stringconnetcion).into(holder.picture);
+        Photo photo = photos.get(position);
+        Picasso.get().load(photo.getUrlS()).into(holder.picture);
+        holder.itemView.setTag(photo);
 
     }
 
     @Override
+    @NonNull
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.showing, parent,false);
@@ -62,11 +58,8 @@ public class PhotoAdapter extends RecyclerView.Adapter <PhotoAdapter.ViewHolder>
         return photos.size();
     }
 
-    public interface OnInsertListener {
-        void OnInsert(Photo photo);
-    }
 
-    public void setOnInsertListener(OnInsertListener onInsertListener) {
-        this.onInsertListener = onInsertListener;
+    public void setOnLongClickListener(OnLongClickListener onLongClickListener) {
+        this.onLongClickListener = onLongClickListener;
     }
 }

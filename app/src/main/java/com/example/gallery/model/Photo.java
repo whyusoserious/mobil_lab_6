@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -28,8 +30,11 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
     "height_s",
     "width_s"
 })
+@Entity
 public class Photo {
 
+    @PrimaryKey
+    @NonNull
     @JsonProperty("id")
     private String id;
     @JsonProperty("owner")
@@ -54,8 +59,7 @@ public class Photo {
     private int heightS;
     @JsonProperty("width_s")
     private int widthS;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
 
     /**
      * No args constructor for use in serialization
@@ -80,6 +84,7 @@ public class Photo {
         this.widthS = widthS;
     }
 
+    @NonNull
     @JsonProperty("id")
     public String getId() {
         return id;
@@ -200,18 +205,10 @@ public class Photo {
         this.widthS = widthS;
     }
 
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
 
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("id", id).append("owner", owner).append("secret", secret).append("server", server).append("farm", farm).append("title", title).append("ispublic", ispublic).append("isfriend", isfriend).append("isfamily", isfamily).append("urlS", urlS).append("heightS", heightS).append("widthS", widthS).append("additionalProperties", additionalProperties).toString();
+        return new ToStringBuilder(this).append("id", id).append("owner", owner).append("secret", secret).append("server", server).append("farm", farm).append("title", title).append("ispublic", ispublic).append("isfriend", isfriend).append("isfamily", isfamily).append("urlS", urlS).append("heightS", heightS).append("widthS", widthS).toString();
     }
 }
