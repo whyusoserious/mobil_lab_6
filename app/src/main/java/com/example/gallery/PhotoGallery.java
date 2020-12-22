@@ -3,10 +3,7 @@ package com.example.gallery;
 import android.app.SearchManager;
 import android.view.MenuItem;
 import android.content.Context;
-import android.content.Intent;
-import android.app.SearchManager;
 import android.view.Menu;
-import android.view.View;
 import android.widget.SearchView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -136,19 +133,4 @@ public class PhotoGallery extends AppCompatActivity {
             return true;
         }
     };
-    public void onLoadNewClick(MenuItem item) {}
 }
-
-
-        /*Intent intent = getIntent();
-        intent.getAction();
-        String c = intent.getStringExtra(SearchManager.QUERY);
-        boolean x = Intent.ACTION_SEARCH.equals(intent.getAction());
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-        SearchView searchView = (SearchView) .findItem(R.id.search_bar)
-            String query = SearchManager.QUERY;
-            earchView sv = findViewById(R.id.search_bar);
-            String Query = sv.getQuery().toString();
-
-       }*/

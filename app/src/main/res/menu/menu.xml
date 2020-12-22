@@ -6,9 +6,6 @@
           app:showAsAction="ifRoom|collapseActionView"
           app:actionViewClass="android.widget.SearchView"/>
 
-    <item android:title="@string/load_new"
-          android:onClick="onLoadNewClick"/>
-
     <item android:title="@string/load_recent"
           android:onClick="onLoadRecentClick"/>
 
