@@ -3,7 +3,7 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/search_bar"
           android:title="@string/title"
-          app:showAsAction="ifRoom|collapseActionView"
+          app:showAsAction="always|collapseActionView"
           app:actionViewClass="android.widget.SearchView"/>
 
     <item android:title="@string/load_recent"
