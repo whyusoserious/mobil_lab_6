@@ -29,6 +29,7 @@ public class PhotoGallery extends AppCompatActivity {
     private final PhotoAdapter adapter = new PhotoAdapter(photos);
     private PhotosDAO dao;
     private final FlickrAPI flickrAPI = ServiceAPI.getRetrofit().create(FlickrAPI.class);
+    boolean openDao = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +57,25 @@ public class PhotoGallery extends AppCompatActivity {
         });
         rv.setAdapter(adapter);
         adapter.setOnLongClickListener(photo -> {
-            dao.insertPhoto(photo);
+            if (openDao == true) {
+                dao.deletePhoto(photo);
+
+                AlertDialog alertDialog = new AlertDialog.Builder(PhotoGallery.this).create(); //Read Update
+                alertDialog.setTitle("Info");
+                alertDialog.setMessage("Pictures deleted!");
+                alertDialog.show();
+            }
+            else
+            {
+                    dao.insertPhoto(photo);
 
             AlertDialog alertDialog = new AlertDialog.Builder(PhotoGallery.this).create(); //Read Update
             alertDialog.setTitle("Info");
             alertDialog.setMessage("Pictures saved!");
             alertDialog.show();
+            }
         });
+
 
     }
 
@@ -81,6 +94,7 @@ public class PhotoGallery extends AppCompatActivity {
     }
 
     public void onLoadRecentClick(MenuItem item) {
+        openDao = false;
         flickrAPI.getRecent().enqueue(new Callback<Example>() {
             @Override
             public void onResponse(Call<Example> call, Response<Example> response) {
@@ -100,6 +114,7 @@ public class PhotoGallery extends AppCompatActivity {
     }
 
     public void onLoadGalleryClick(MenuItem item) {
+        openDao = true;
         photos.clear();
         photos.addAll(dao.LoadAll());
         adapter.notifyDataSetChanged();
@@ -111,6 +126,7 @@ public class PhotoGallery extends AppCompatActivity {
             flickrAPI.getSearchPhotos(query).enqueue(new Callback<Example>() {
                 @Override
                 public void onResponse(Call<Example> call, Response<Example> response) {
+                    openDao = false;
                     photos.clear();
                     photos.addAll(response.body().getPhotos().getPhoto());
                     adapter.notifyDataSetChanged();
